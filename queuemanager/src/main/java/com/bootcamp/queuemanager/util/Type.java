@@ -1,2 +1,7 @@
-package com.bootcamp.queuemanager.util;public enum Type {
+package com.bootcamp.queuemanager.util;
+
+public enum Type {
+    SUGESTAO,
+    ELOGIO,
+    CRITICA
 }

@@ -20,7 +20,26 @@
 		<aws.java.sdk.version>2.20.150</aws.java.sdk.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${aws.java.sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
+        <!-- Javax -->
+        <dependency>
+            <groupId>javax.jms</groupId>
+            <artifactId>javax.jms-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
 		<!-- Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -37,22 +56,35 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-		<!-- AWS SDK -->
-		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>sns</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>sqs</artifactId>
-		</dependency>
+        <!-- AWS -->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>iam-policy-builder</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>amazon-sqs-java-messaging-lib</artifactId>
+            <version>1.0.4</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>sns</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>sqs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>sts</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
