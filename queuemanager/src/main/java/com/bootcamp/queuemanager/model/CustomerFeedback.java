@@ -22,6 +22,10 @@ public class CustomerFeedback {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Type getType() {
         return type;
     }

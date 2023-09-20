@@ -16,14 +16,14 @@ public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
 
-    /* Enviar Feedback */
+    /** Enviar Feedback **/
     @PostMapping("/envio")
     public ResponseEntity<String> enviarFeedback(@RequestBody CustomerFeedback feedback) {
-        //TODO chamada da service
-        return ResponseEntity.ok("");
+        feedbackService.enviaFeedback(feedback);
+        return ResponseEntity.ok("Feedback enviado!");
     }
 
-    /* Obter tamanho atual da fila de feedbacks para cada tipo */
+    /** Obter tamanho atual da fila de feedbacks para cada tipo **/
     @GetMapping("/tamanho")
     public ResponseEntity<String> obterTamanhoDaFila(@RequestParam String tipo) {
         int tamanho = 0;
@@ -31,7 +31,7 @@ public class FeedbackController {
         return ResponseEntity.ok("A fila do tipo " + tipo + " possui tamanho " + tamanho);
     }
 
-    /* Obter informações sobre todos os feedbacks na fila de cada tipo */
+    /** Obter informações sobre todos os feedbacks na fila de cada tipo **/
     @GetMapping("/info")
     public ResponseEntity<List<CustomerFeedback>> obterInformacoesFeedbacks (@RequestParam String tipo) {
         List<CustomerFeedback> feedbacks = new ArrayList<>();
