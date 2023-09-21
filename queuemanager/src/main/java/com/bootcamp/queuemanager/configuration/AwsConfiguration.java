@@ -8,6 +8,7 @@ import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sns.SnsClient;
+import software.amazon.awssdk.services.sqs.SqsClient;
 
 @Configuration
 public class AwsConfiguration {
@@ -20,6 +21,11 @@ public class AwsConfiguration {
     @Value("${cloud.aws.region}")
     private String awsRegion;
 
+    private AwsCredentialsProvider awsCredentialsProvider() {
+        return StaticCredentialsProvider.create(
+                AwsBasicCredentials.create(awsAccessKey, awsSecretKey));
+    }
+
     @Bean
     public SnsClient snsClient() {
         AwsCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(
@@ -27,7 +33,16 @@ public class AwsConfiguration {
 
         return SnsClient.builder()
                 .region(Region.of(awsRegion))
-                .credentialsProvider(credentialsProvider)
+                .credentialsProvider(awsCredentialsProvider())
+                .build();
+    }
+
+    @Bean
+    public SqsClient sqsClient() {
+
+        return SqsClient.builder()
+                .region(Region.of(awsRegion))
+                .credentialsProvider(awsCredentialsProvider())
                 .build();
     }
 }
