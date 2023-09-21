@@ -1,17 +1,18 @@
 package com.bootcamp.queuemanager.service;
 
-import com.bootcamp.queuemanager.model.CustomerFeedback;
+import com.bootcamp.queuemanager.exception.BadRequestException;
+import com.bootcamp.queuemanager.model.CustomerFeedbackRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sns.SnsClient;
 import software.amazon.awssdk.services.sns.model.PublishRequest;
 import software.amazon.awssdk.services.sns.model.PublishResponse;
 
 @Service
-public class FeedbackService {
+public class FeedbackProducerService {
 
     @Autowired
     private SnsClient snsClient;
@@ -25,32 +26,33 @@ public class FeedbackService {
     @Value("${aws.sns.criticas-arn}")
     private String snsTopicCriticas;
 
-    public FeedbackService(SnsClient snsClient) {
+    private static final Logger LOG = LoggerFactory.getLogger(FeedbackProducerService.class);
+
+    public FeedbackProducerService(SnsClient snsClient) {
         this.snsClient = snsClient;
     }
 
-    public void enviaFeedback(CustomerFeedback feedback) {
+    public void sendFeedback(CustomerFeedbackRequest feedback) {
         String snsArn;
         switch (feedback.getType()){
             case SUGESTAO -> snsArn = snsTopicSugestoes;
             case ELOGIO -> snsArn = snsTopicElogios;
             case CRITICA -> snsArn = snsTopicCriticas;
-            default -> snsArn = "";
+            default -> throw new BadRequestException("Invalid Feedback Type! " +
+                    "Consider SUGESTAO, ELOGIO or CRITICA.");
         }
 
         PublishRequest publishRequest = PublishRequest.builder()
                 .topicArn(snsArn)
-                .messageGroupId("DEFAULT")
+                .messageGroupId("DEFAULT-GROUP-ID")
                 .message(feedback.getMessage())
                 .build();
 
-        PublishResponse response = snsClient.publish(publishRequest);
-    }
+        LOG.info("[PRODUCER] Sending Message to {} SNS. Message: {}",
+                feedback.getType(), feedback.getMessage());
 
-    private void buildSnsClient() {
-        this.snsClient = SnsClient.builder()
-                .region(Region.US_EAST_1)
-                .credentialsProvider(DefaultCredentialsProvider.create())
-                .build();
+        PublishResponse response = snsClient.publish(publishRequest);
+
+        LOG.info("[PRODUCER] SNS Response: {}", response.toString());
     }
 }

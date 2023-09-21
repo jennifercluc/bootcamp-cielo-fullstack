@@ -22,7 +22,6 @@ public class AwsConfiguration {
 
     @Bean
     public SnsClient snsClient() {
-
         AwsCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(
                 AwsBasicCredentials.create(awsAccessKey, awsSecretKey));
 

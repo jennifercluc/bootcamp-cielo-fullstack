@@ -1,7 +1,7 @@
 package com.bootcamp.queuemanager.controller;
 
-import com.bootcamp.queuemanager.model.CustomerFeedback;
-import com.bootcamp.queuemanager.service.FeedbackService;
+import com.bootcamp.queuemanager.model.CustomerFeedbackRequest;
+import com.bootcamp.queuemanager.service.FeedbackProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +14,12 @@ import java.util.List;
 public class FeedbackController {
 
     @Autowired
-    private FeedbackService feedbackService;
+    private FeedbackProducerService feedbackProducerService;
 
     /** Enviar Feedback **/
     @PostMapping("/envio")
-    public ResponseEntity<String> enviarFeedback(@RequestBody CustomerFeedback feedback) {
-        feedbackService.enviaFeedback(feedback);
+    public ResponseEntity<String> enviarFeedback(@RequestBody CustomerFeedbackRequest feedback) {
+        feedbackProducerService.sendFeedback(feedback);
         return ResponseEntity.ok("Feedback enviado!");
     }
 
@@ -27,16 +27,15 @@ public class FeedbackController {
     @GetMapping("/tamanho")
     public ResponseEntity<String> obterTamanhoDaFila(@RequestParam String tipo) {
         int tamanho = 0;
-        //TODO chamada da service
+            //TODO chamada da service
         return ResponseEntity.ok("A fila do tipo " + tipo + " possui tamanho " + tamanho);
     }
 
     /** Obter informações sobre todos os feedbacks na fila de cada tipo **/
     @GetMapping("/info")
-    public ResponseEntity<List<CustomerFeedback>> obterInformacoesFeedbacks (@RequestParam String tipo) {
-        List<CustomerFeedback> feedbacks = new ArrayList<>();
-        //TODO chamada da service, definir estrutura de dados
+    public ResponseEntity<List<CustomerFeedbackRequest>> obterInformacoesFeedbacks (@RequestParam String tipo) {
+        List<CustomerFeedbackRequest> feedbacks = new ArrayList<>();
+            //TODO chamada da service, utilizar MAPA cuja chave é a inicial do tipo da fila
         return ResponseEntity.ok(feedbacks);
     }
-
 }
