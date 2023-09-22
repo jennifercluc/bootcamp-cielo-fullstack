@@ -3,8 +3,6 @@ package com.bootcamp.queuemanager.controller;
 import com.bootcamp.queuemanager.model.CustomerFeedbackRequest;
 import com.bootcamp.queuemanager.service.FeedbackProducerService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
