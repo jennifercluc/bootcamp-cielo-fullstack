@@ -6,16 +6,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import software.amazon.awssdk.services.sqs.SqsClient;
 
 @Component
 @EnableScheduling
-public class ConsumeJob {
+public class ConsumerJob {
 
-    private SQSConsumer sqsConsumer;
+    private final SQSConsumer sqsConsumer;
 
     @Autowired
-    public ConsumeJob(SQSConsumer sqsConsumer) {
+    public ConsumerJob(SQSConsumer sqsConsumer) {
         this.sqsConsumer = sqsConsumer;
     }
 
@@ -34,4 +33,6 @@ public class ConsumeJob {
         sqsConsumer.processMessages(queueElogioUrl);
         sqsConsumer.processMessages(queueCriticasUrl);
     }
+
+
 }

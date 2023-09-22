@@ -1,5 +1,7 @@
 package com.bootcamp.queuemanager.configuration;
 
+import com.bootcamp.queuemanager.dto.CustomerFeedbackDTO;
+import com.bootcamp.queuemanager.util.Type;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +12,11 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sns.SnsClient;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
+
 @Configuration
-public class AwsConfiguration {
+public class AppConfiguration {
     @Value("${aws.accessKeyId}")
     private String awsAccessKey;
 
@@ -44,5 +49,15 @@ public class AwsConfiguration {
                 .region(Region.of(awsRegion))
                 .credentialsProvider(awsCredentialsProvider())
                 .build();
+    }
+
+    @Bean
+    public ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap() {
+        ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> map = new ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>>();
+        map.put(Type.ELOGIO, new LinkedList<>());
+        map.put(Type.SUGESTAO, new LinkedList<>());
+        map.put(Type.CRITICA, new LinkedList<>());
+
+        return map;
     }
 }

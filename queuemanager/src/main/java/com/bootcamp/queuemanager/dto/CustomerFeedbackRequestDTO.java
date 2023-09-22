@@ -1,12 +1,12 @@
-package com.bootcamp.queuemanager.model;
+package com.bootcamp.queuemanager.dto;
 
 import com.bootcamp.queuemanager.util.Type;
 
-public class CustomerFeedbackRequest {
+public class CustomerFeedbackRequestDTO {
     private Type type;
     private String message;
 
-    public CustomerFeedbackRequest(Type type, String message) {
+    public CustomerFeedbackRequestDTO(Type type, String message) {
         this.type = type;
         this.message = message;
     }

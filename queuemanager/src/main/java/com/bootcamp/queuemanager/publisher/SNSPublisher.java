@@ -1,38 +1,36 @@
-package com.bootcamp.queuemanager.service;
+package com.bootcamp.queuemanager.publisher;
 
+import com.bootcamp.queuemanager.dto.CustomerFeedbackRequestDTO;
 import com.bootcamp.queuemanager.exception.BadRequestException;
-import com.bootcamp.queuemanager.model.CustomerFeedbackRequest;
+import com.bootcamp.queuemanager.service.FeedbackService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.sns.SnsClient;
 import software.amazon.awssdk.services.sns.model.PublishRequest;
 import software.amazon.awssdk.services.sns.model.PublishResponse;
 
-@Service
-public class FeedbackProducerService {
-
+@Component
+public class SNSPublisher {
     @Autowired
     private SnsClient snsClient;
 
     @Value("${aws.sns.sugestoes-arn}")
     private String snsTopicSugestoes;
-
     @Value("${aws.sns.elogios-arn}")
     private String snsTopicElogios;
-
     @Value("${aws.sns.criticas-arn}")
     private String snsTopicCriticas;
 
-    private static final Logger LOG = LoggerFactory.getLogger(FeedbackProducerService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FeedbackService.class);
 
-    public FeedbackProducerService(SnsClient snsClient) {
+    public SNSPublisher(SnsClient snsClient) {
         this.snsClient = snsClient;
     }
 
-    public void sendFeedback(CustomerFeedbackRequest feedback) {
+    public void sendNotification(CustomerFeedbackRequestDTO feedback) {
         String snsArn;
         switch (feedback.getType()){
             case SUGESTAO -> snsArn = snsTopicSugestoes;
@@ -48,11 +46,11 @@ public class FeedbackProducerService {
                 .message(feedback.getMessage())
                 .build();
 
-        LOG.info("[PRODUCER] Sending Message to {} SNS. Message: {}",
+        LOG.info("[PUBLISHER] Sending Message to {} SNS. Message: {}",
                 feedback.getType(), feedback.getMessage());
 
         PublishResponse response = snsClient.publish(publishRequest);
 
-        LOG.info("[PRODUCER] SNS Response: {}", response.toString());
+        LOG.info("[PUBLISHER] SNS Response: {}", response.toString());
     }
 }

@@ -5,16 +5,16 @@ public enum Type {
     ELOGIO('E'),
     CRITICA('C');
 
-    private final char valor;
-    Type(char valor) {
+    private final Character valor;
+    Type(Character valor) {
         this.valor = valor;
     }
 
-    public char getValor() {
+    public Character getValor() {
         return valor;
     }
 
-    public static Type fromValor(char valor) {
+    public static Type fromValor(Character valor) {
         for (Type tipo : Type.values()) {
             if (tipo.valor == valor) return tipo;
         }
