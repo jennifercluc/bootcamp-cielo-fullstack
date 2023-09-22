@@ -2,6 +2,10 @@ package com.bootcamp.queuemanager.controller;
 
 import com.bootcamp.queuemanager.model.CustomerFeedbackRequest;
 import com.bootcamp.queuemanager.service.FeedbackProducerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Tag(name = "Feedback", description = "APIs de envio e verificação de Feedbacks")
 @RestController
 @RequestMapping("/api/feedback")
 public class FeedbackController {
@@ -17,6 +22,9 @@ public class FeedbackController {
     private FeedbackProducerService feedbackProducerService;
 
     /** Enviar Feedback **/
+    @Operation(
+            summary = "Envia um Feedback",
+            description = "Envia um Feedback, que é uma mensagem de texto de 1 dos 3 tipos [SUGESTAO, ELOGIO, CRITICA].")
     @PostMapping("/envio")
     public ResponseEntity<String> enviarFeedback(@RequestBody CustomerFeedbackRequest feedback) {
         feedbackProducerService.sendFeedback(feedback);
