@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FilaService } from './shared/services/fila.service';
 
 @Component({
   selector: 'app-root',

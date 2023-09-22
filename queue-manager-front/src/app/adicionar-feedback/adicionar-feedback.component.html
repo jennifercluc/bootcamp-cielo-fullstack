@@ -1,0 +1,31 @@
+<h2>Adicione uma Sugestão, Crítica ou Elogio!</h2>
+
+<form (ngSubmit)="adicionarNaFila()">
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Mensagem:</mat-label>
+      <input
+        matInput
+        type="text"
+        id="mensagem"
+        name="mensagem"
+        [(ngModel)]="mensagem"
+        required
+      />
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Tipo da Fila:</mat-label>
+      <input
+        matInput
+        type="text"
+        id="tipo"
+        name="tipo"
+        [(ngModel)]="tipo"
+        required
+      />
+    </mat-form-field>
+  </div>
+  <button mat-raised-button type="submit">Enviar FeedBack</button>
+</form>

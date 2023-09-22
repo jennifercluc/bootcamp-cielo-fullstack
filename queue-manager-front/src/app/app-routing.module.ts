@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdicionarFeedBackComponent } from './adicionar-feedback/adicionar-feedback.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'gerenciar',
+    component: AdicionarFeedBackComponent,
+  },
+  { path: '', redirectTo: 'gerenciar', pathMatch: 'full' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
