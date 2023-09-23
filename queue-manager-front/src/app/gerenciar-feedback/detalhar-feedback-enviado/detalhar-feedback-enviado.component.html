@@ -2,23 +2,26 @@
 
 <div class="button-container">
   <button
-    mat-button
+    mat-raised-button
     (click)="openModal('Elogio')"
     class="custom-button green-button"
+    style="background-color: rgba(0, 128, 0, 0.5)"
   >
     Elogio: <span class="circle">{{ elogioCount }}</span>
   </button>
   <button
-    mat-button
+    mat-raised-button
     (click)="openModal('Crítica')"
-    class="custom-button red-button"
+    class="custom-button"
+    style="background-color: rgba(255, 0, 0, 0.5)"
   >
     Crítica: <span class="circle">{{ criticaCount }}</span>
   </button>
   <button
-    mat-button
+    mat-raised-button
     (click)="openModal('Sugestão')"
-    class="custom-button orange-button"
+    class="custom-button"
+    style="background-color: rgba(255, 165, 0, 0.5)"
   >
     Sugestão: <span class="circle">{{ sugestaoCount }}</span>
   </button>

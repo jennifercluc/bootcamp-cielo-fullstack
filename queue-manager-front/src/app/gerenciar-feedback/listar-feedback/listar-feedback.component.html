@@ -24,3 +24,9 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<mat-card *ngIf="dataTable.length === 0">
+  <mat-card-content>
+    <p>Nenhum feedback disponível no momento.</p>
+  </mat-card-content>
+</mat-card>
