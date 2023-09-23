@@ -33,6 +33,4 @@ public class ConsumerJob {
         sqsConsumer.processMessages(queueElogioUrl);
         sqsConsumer.processMessages(queueCriticasUrl);
     }
-
-
 }
