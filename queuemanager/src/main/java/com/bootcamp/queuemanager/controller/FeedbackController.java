@@ -25,15 +25,29 @@ public class FeedbackController {
 
     /** Obter tamanho atual da fila de feedbacks para cada tipo **/
     @GetMapping("/tamanho")
-    public ResponseEntity<String> obterTamanhoDaFila(@RequestParam String tipo) {
-        int tamanho = feedbackService.getQueueSize(tipo);
-        return ResponseEntity.ok("A fila do tipo " + tipo + " possui tamanho " + tamanho);
+    public ResponseEntity<String> obterTamanhoDaFila(@RequestParam String type) {
+        int size = feedbackService.getQueueSize(type);
+        return ResponseEntity.ok("A fila do tipo " + type + " possui tamanho " + size);
+    }
+
+    /** Obter informações sobre todos os feedbacks de uma fila SQS **/
+    @GetMapping("/info")
+    public ResponseEntity<LinkedList<CustomerFeedbackDTO>> obterInformacoesFila (@RequestParam String type) {
+        LinkedList<CustomerFeedbackDTO> feedbacks = feedbackService.getQueueInformation(type);
+        return ResponseEntity.ok(feedbacks);
     }
 
     /** Obter informações sobre todos os feedbacks na fila de cada tipo **/
-    @GetMapping("/info")
-    public ResponseEntity<LinkedList<CustomerFeedbackDTO>> obterInformacoesFeedbacks (@RequestParam String tipo) {
-        LinkedList<CustomerFeedbackDTO> feedbacks = feedbackService.getQueueInformation(tipo);
+    @GetMapping("/info/all")
+    public ResponseEntity<LinkedList<CustomerFeedbackDTO>> obterInformacoesFeedbacks (@RequestParam String type) {
+        LinkedList<CustomerFeedbackDTO> feedbacks = feedbackService.getQueueInformation(type);
         return ResponseEntity.ok(feedbacks);
+    }
+
+    /** Obter informações sobre todos os feedbacks na fila de cada tipo **/
+    @GetMapping("/job")
+    public ResponseEntity<String> dispararArmazenamento (@RequestParam String type) {
+        feedbackService.armazenar(type);
+        return ResponseEntity.ok("Armazenamento em memória da fila "+ type +" concluído!");
     }
 }

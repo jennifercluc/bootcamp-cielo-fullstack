@@ -36,7 +36,7 @@ public class SNSPublisher {
             case SUGESTAO -> snsArn = snsTopicSugestoes;
             case ELOGIO -> snsArn = snsTopicElogios;
             case CRITICA -> snsArn = snsTopicCriticas;
-            default -> throw new BadRequestException("Invalid Feedback Type! " +
+            default -> throw new IllegalArgumentException("Invalid Feedback Type! " +
                     "Consider SUGESTAO, ELOGIO or CRITICA.");
         }
 

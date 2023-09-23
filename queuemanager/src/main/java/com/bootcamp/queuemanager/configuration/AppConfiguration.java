@@ -44,7 +44,6 @@ public class AppConfiguration {
 
     @Bean
     public SqsClient sqsClient() {
-
         return SqsClient.builder()
                 .region(Region.of(awsRegion))
                 .credentialsProvider(awsCredentialsProvider())
