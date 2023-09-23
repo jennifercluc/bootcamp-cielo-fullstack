@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdicionarFeedBackComponent } from './adicionar-feedback/adicionar-feedback.component';
+import { AdicionarFeedBackComponent } from './gerenciar-feedback/adicionar-feedback/adicionar-feedback.component';
 
 const routes: Routes = [
   {

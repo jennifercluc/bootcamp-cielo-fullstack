@@ -1,7 +1,9 @@
-import { IFeedBack } from './../shared/models/tipo-feedback.model';
-import { FeedBackService } from './../shared/services/feedback.service';
+import {
+  IFeedBack,
+  TipoFeedback,
+} from '../../shared/models/tipo-feedback.model';
+import { FeedBackService } from '../../shared/services/feedback.service';
 import { Component } from '@angular/core';
-import { TipoFeedback } from '../shared/models/tipo-feedback.model';
 
 @Component({
   selector: 'app-adicionar-feedback',
