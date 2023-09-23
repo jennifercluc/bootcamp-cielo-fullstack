@@ -24,12 +24,12 @@ Desenvolvedores (Equipe G6):
 
 - queuemanager: Implementação do backend
 - queue-manager-front:  Implementação do front end
-- infra-aws: Arquivos relacionados aos recursos AWS necessários
-- carga-inicial: Scripts de carga de dados nas filas
+- resources/terraform: Arquivos relacionados aos recursos AWS necessários
+- resources/scripts: Scripts de carga de dados nas filas
 
 ## Recursos
 
-### AWS
+### AWS / Terraform
 
 - criação de tópicos e filas na AWS de acordo com informações
   encontradas em infra-aws/terreform
@@ -48,8 +48,8 @@ diretamente neste repositório.
 ### Carga inicial
 
 Com todo o ambiente preparado, é possível fazer uma carga
-inicial de feedback, 10 de cada tipo, executando script de
-carga encontrado no diretório carga-inicial. 
+inicial de feedback, 10 de cada tipo, executando o script de
+carga. 
 
 ## URLs
 
