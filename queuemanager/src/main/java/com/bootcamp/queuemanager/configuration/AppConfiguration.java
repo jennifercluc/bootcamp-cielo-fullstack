@@ -68,6 +68,7 @@ public class AppConfiguration {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("http://localhost:4200");
+        corsConfiguration.addAllowedOrigin("http://localhost");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.addAllowedHeader("*");
 
