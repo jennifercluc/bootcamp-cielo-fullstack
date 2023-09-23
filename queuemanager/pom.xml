@@ -114,6 +114,7 @@
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>sts</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
