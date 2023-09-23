@@ -1,5 +1,3 @@
-#!/bin/sh
-
 curl -X POST http://localhost:8080/api/feedback/envio -H 'Content-Type: application/json' -d '{"type":"ELOGIO", "Excelente atendimento ao cliente!"}'
 curl -X POST http://localhost:8080/api/feedback/envio -H 'Content-Type: application/json' -d '{"type":"ELOGIO", "Serviço de entrega rápido e eficiente."}'
 curl -X POST http://localhost:8080/api/feedback/envio -H 'Content-Type: application/json' -d '{"type":"ELOGIO", "Equipe extremamente prestativa e amigável."}'
