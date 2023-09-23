@@ -18,6 +18,20 @@ export class FeedBackService {
     return this.httpClient.get<any[]>(`${this.apiUrl}/feedbacks`);
   }
 
+  getFeedbackSizes(): Observable<any> {
+    const feedbackData = {
+      elogio: this.getRandomNumber(),
+      critica: this.getRandomNumber(),
+      sugestao: this.getRandomNumber(),
+    };
+
+    return of(feedbackData);
+  }
+
+  private getRandomNumber(): number {
+    return Math.floor(Math.random() * 20);
+  }
+
   private feedbacks = [
     {
       id: 1,
