@@ -1,1 +1,6 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.error-message {
+  display: none;
+  color: red;
+}

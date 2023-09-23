@@ -1,5 +1,6 @@
+import { IFeedBack } from './../shared/models/tipo-feedback.model';
+import { FeedBackService } from './../shared/services/feedback.service';
 import { Component } from '@angular/core';
-import { FilaService } from '../shared/services/fila.service';
 import { TipoFeedback } from '../shared/models/tipo-feedback.model';
 
 @Component({
@@ -9,20 +10,35 @@ import { TipoFeedback } from '../shared/models/tipo-feedback.model';
 })
 export class AdicionarFeedBackComponent {
   tiposDeFeedback: TipoFeedback[] = [
-    new TipoFeedback(1, 'Sugestão'),
-    new TipoFeedback(2, 'Crítica'),
-    new TipoFeedback(3, 'Elogio'),
+    new TipoFeedback('SUGESTAO', 'Sugestão'),
+    new TipoFeedback('CRITICA', 'Crítica'),
+    new TipoFeedback('ELOGIO', 'Elogio'),
   ];
   mensagem: string = '';
   tipo: string = '';
 
-  constructor(private filaService: FilaService) {}
+  constructor(private feedBackService: FeedBackService) {}
 
-  adicionarNaFila() {
+  enviarNovoFeedBack() {
     if (this.mensagem && this.tipo) {
-      this.filaService.adicionarNaFila(this.mensagem, this.tipo);
-      this.mensagem = '';
-      this.tipo = '';
+      var novoFeedback: IFeedBack = {
+        message: this.mensagem,
+        type: this.tipo,
+      };
+
+      this.fetchEnviarFeedBack(novoFeedback);
     }
+  }
+
+  private fetchEnviarFeedBack(novoFeedback: IFeedBack) {
+    this.feedBackService.enviarFeedBack(novoFeedback).subscribe(
+      (response) => {
+        this.mensagem = '';
+        this.tipo = '';
+      },
+      (error) => {
+        console.error('Ocorreu um erro ao enviar o feedback:', error);
+      }
+    );
   }
 }
