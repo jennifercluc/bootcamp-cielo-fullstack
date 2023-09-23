@@ -1,0 +1,25 @@
+<h2>Detalhar Feedback Enviado</h2>
+
+<div class="button-container">
+  <button
+    mat-button
+    (click)="openModal('Elogio')"
+    class="custom-button green-button"
+  >
+    Elogio: <span class="circle">{{ elogioCount }}</span>
+  </button>
+  <button
+    mat-button
+    (click)="openModal('Crítica')"
+    class="custom-button red-button"
+  >
+    Crítica: <span class="circle">{{ criticaCount }}</span>
+  </button>
+  <button
+    mat-button
+    (click)="openModal('Sugestão')"
+    class="custom-button orange-button"
+  >
+    Sugestão: <span class="circle">{{ sugestaoCount }}</span>
+  </button>
+</div>

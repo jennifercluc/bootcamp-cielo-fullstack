@@ -1,6 +1,5 @@
 package com.bootcamp.queuemanager.consumer;
 
-import com.amazonaws.services.guardduty.model.Feedback;
 import com.bootcamp.queuemanager.dto.CustomerFeedbackDTO;
 import com.bootcamp.queuemanager.util.Status;
 import com.bootcamp.queuemanager.util.Type;

@@ -1,0 +1,35 @@
+.custom-button {
+  font-size: 13px;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+}
+
+.green-button {
+  background-color: rgba(0, 128, 0, 0.5);
+  color: white;
+}
+
+.red-button {
+  background-color: rgba(255, 0, 0, 0.5);
+  color: white;
+}
+
+.orange-button {
+  background-color: rgba(255, 165, 0, 0.5);
+  color: white;
+}
+
+.circle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 10px;
+  font-weight: bold;
+}
