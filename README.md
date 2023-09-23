@@ -57,3 +57,5 @@ carga.
   - http://localhost:8080/swagger-ui/index.html
 - Frontend:
   - http://localhost:4200/
+- Spring Boot Actuator
+  - http://localhost:8080/actuator
