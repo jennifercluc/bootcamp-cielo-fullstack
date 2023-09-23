@@ -3,16 +3,18 @@ package com.bootcamp.queuemanager.dto;
 import com.bootcamp.queuemanager.util.Status;
 import com.bootcamp.queuemanager.util.Type;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerFeedbackDTO {
     private String id;
     private Status status;
     private Type type;
     private String message;
-
     private String topicArn;
 
+    public CustomerFeedbackDTO(){};
     public CustomerFeedbackDTO(String id, Status status, Type type, String message, String topicArn) {
         this.id = id;
         this.status = status;

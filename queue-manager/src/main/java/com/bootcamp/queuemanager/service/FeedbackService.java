@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -44,16 +43,9 @@ public class FeedbackService {
         return concurrentHashMap.get(Type.valueOf(type)).stream()
                 .filter(feedback -> !feedback.getStatus().equals(Status.FINALIZADO))
                 .collect(Collectors.toCollection(LinkedList<CustomerFeedbackDTO>::new));
-
-
-        /*return concurrentHashMap.get(Type.valueOf(type)).stream()
-                .filter(feedback -> !feedback.getStatus().equals(Status.FINALIZADO))
-                .collect(Collectors.toCollection(LinkedList::new));*/
     }
 
     public void armazenar(String type) {
         sqsConsumer.execute(Type.valueOf(type));
     }
-
-
 }

@@ -66,26 +66,35 @@ public class SQSConsumer {
         String messageId = message.messageId();
 
         try {
-            Thread.sleep(20000); // 20 segundos
+            Thread.sleep(5000); // 5 segundos
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
-        LOG.info("[CONSUMER] URL: {} // MESSAGE: {}",  queueUrl, message);
-        LOG.info("[CONSUMER] FEEDBACK DTO: {}",  feedbackDTO);
+        LOG.info("[CONSUMER] URL: {}",  queueUrl);
+        LOG.info("[CONSUMER] MESSAGE: {}", message);
 
         updateFeedbackStatusStored(feedbackDTO, Status.EM_PROCESSAMENTO);
+        LOG.info("[CONSUMER] Feedback EM PROCESSAMENTO: {}", messageId);
+        LOG.warn("[CONSUMER] Mapa: {}", concurrentHashMap.size());
+        LOG.warn("[CONSUMER] Fila de ELOGIO: {}", concurrentHashMap.get(Type.ELOGIO).size());
+        LOG.warn("[CONSUMER] Fila de CRITICA: {}", concurrentHashMap.get(Type.CRITICA).size());
+        LOG.warn("[CONSUMER] Fila de SUGESTAO: {}", concurrentHashMap.get(Type.SUGESTAO).size());
 
         try {
-            Thread.sleep(20000); // 20 segundos
+            Thread.sleep(5000); // 5 segundos
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
         updateFeedbackStatusStored(feedbackDTO, Status.FINALIZADO);
+        LOG.warn("[CONSUMER] Mapa: {}", concurrentHashMap.size());
+        LOG.warn("[CONSUMER] Fila de ELOGIO: {}", concurrentHashMap.get(Type.ELOGIO).size());
+        LOG.warn("[CONSUMER] Fila de CRITICA: {}", concurrentHashMap.get(Type.CRITICA).size());
+        LOG.warn("[CONSUMER] Fila de SUGESTAO: {}", concurrentHashMap.get(Type.SUGESTAO).size());
 
         deleteProcessedMessage(queueUrl, message);
-        System.out.println("Feedback processado com sucesso: " + messageId);
+        LOG.info("[CONSUMER] Feedback FINALIZADO com sucesso: {}", messageId);
     }
 
     /* Remove a mensagem processada da fila SQS. */
@@ -107,7 +116,14 @@ public class SQSConsumer {
         feedbacks.add(feedbackDTO);
         concurrentHashMap.put(fila, feedbacks);*/
 
+        feedbackDTO.setStatus(Status.RECEBIDO);
+        LOG.info("[CONSUMER] Feedback RECEBIDO: {}", feedbackDTO.getId());
         concurrentHashMap.get(feedbackDTO.getType()).add(feedbackDTO);
+
+        LOG.warn("[CONSUMER] Mapa: {}", concurrentHashMap.size());
+        LOG.warn("[CONSUMER] Fila de ELOGIO: {}", concurrentHashMap.get(Type.ELOGIO).size());
+        LOG.warn("[CONSUMER] Fila de CRITICA: {}", concurrentHashMap.get(Type.CRITICA).size());
+        LOG.warn("[CONSUMER] Fila de SUGESTAO: {}", concurrentHashMap.get(Type.SUGESTAO).size());
     }
 
     private String getUrlFromType(Type type) {
