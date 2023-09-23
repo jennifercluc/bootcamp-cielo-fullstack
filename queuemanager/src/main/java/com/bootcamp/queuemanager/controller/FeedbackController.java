@@ -30,6 +30,8 @@ public class FeedbackController {
     }
 
     /** Obter tamanho atual da fila de feedbacks para cada tipo **/
+    @Operation(
+            summary = "Obtem o tamanho da fila")
     @GetMapping("/tamanho")
     public ResponseEntity<String> obterTamanhoDaFila(@RequestParam String tipo) {
         int tamanho = 0;
@@ -38,6 +40,8 @@ public class FeedbackController {
     }
 
     /** Obter informações sobre todos os feedbacks na fila de cada tipo **/
+    @Operation(
+            summary = "Obtem informaçes sobre Feedbacks")
     @GetMapping("/info")
     public ResponseEntity<List<CustomerFeedbackRequest>> obterInformacoesFeedbacks (@RequestParam String tipo) {
         List<CustomerFeedbackRequest> feedbacks = new ArrayList<>();

@@ -22,7 +22,7 @@ public class OpenAPIConfig {
         devServer.setDescription("URL do serviço em ambiente de desenvolvimento");
 
         Info info = new Info()
-                .title("API do desafio ADA-Cielo-Bootcamp")
+                .title("API do desafio em grup do Bootcamp Cielo Dev - AdaTech")
                 .version("1.0")
                 .description("Equipe G6: Jennifer Carolinne, Mateus Fellipe e Anselmo.");
 
