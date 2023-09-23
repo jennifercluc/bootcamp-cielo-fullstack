@@ -34,11 +34,11 @@
 
     <dependencies>
         <!-- Javax -->
-        <dependency>
+        <!-- <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>javax.jms-api</artifactId>
             <version>2.0.1</version>
-        </dependency>
+        </dependency> -->
 
 		<!-- Swagger -->
         <dependency>
@@ -62,16 +62,45 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Spring cloud for SNS http endpoint-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-aws-messaging</artifactId>
+            <version>2.2.6.RELEASE</version>
+        </dependency>
+        <!-- Spring Cloud AWS -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-aws</artifactId>
+            <version>2.2.6.RELEASE</version>
+        </dependency>
+        <!-- For Spring AWS autoconfiguration-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-aws-autoconfigure</artifactId>
+            <version>2.2.6.RELEASE</version>
+        </dependency>
+
         <!-- AWS -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.12.429</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>amazon-sqs-java-messaging-lib</artifactId>
+            <version>2.1.1</version>
+            <type>jar</type>
+        </dependency>
+
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>iam-policy-builder</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>amazon-sqs-java-messaging-lib</artifactId>
-            <version>1.0.4</version>
-            <type>jar</type>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>lambda</artifactId>
         </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>

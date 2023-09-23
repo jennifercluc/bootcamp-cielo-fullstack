@@ -1,20 +1,17 @@
-package com.bootcamp.queuemanager.model;
+package com.bootcamp.queuemanager.dto;
 
 import com.bootcamp.queuemanager.util.Status;
 import com.bootcamp.queuemanager.util.Type;
 
-import java.util.UUID;
-
-public class CustomerFeedback {
+public class CustomerFeedbackDTO {
     private String id;
-    private Type type;
+
     private Status status;
+    private Type type;
     private String message;
 
-    public CustomerFeedback(Long id, Type type, Status status, String message) {
-        this.id = UUID.randomUUID().toString();
+    public CustomerFeedbackDTO(Type type, String message) {
         this.type = type;
-        this.status = status;
         this.message = message;
     }
 
@@ -22,12 +19,8 @@ public class CustomerFeedback {
         return id;
     }
 
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Status getStatus() {
@@ -36,6 +29,14 @@ public class CustomerFeedback {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String getMessage() {
