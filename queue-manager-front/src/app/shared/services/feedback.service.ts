@@ -23,17 +23,10 @@ export class FeedBackService {
     });
   }
 
-  getFeedbackSizes(): Observable<any> {
-    const feedbackData = {
-      elogio: this.getRandomNumber(),
-      critica: this.getRandomNumber(),
-      sugestao: this.getRandomNumber(),
-    };
-
-    return of(feedbackData);
-  }
-
-  private getRandomNumber(): number {
-    return Math.floor(Math.random() * 20);
+  getFeedbackSizes(tipo: string): Observable<number> {
+    const params = new HttpParams().set('tipo', tipo);
+    return this.httpClient.get<number>(`${this.apiUrl}/tamanho`, {
+      params,
+    });
   }
 }

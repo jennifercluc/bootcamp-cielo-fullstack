@@ -9,9 +9,8 @@ import { ModalContentComponent } from './modal-content/modal-content.component';
   styleUrls: ['./detalhar-feedback-enviado.component.scss'],
 })
 export class DetalharFeedbackEnviadoComponent {
-  elogioCount: number = 0;
-  criticaCount: number = 0;
-  sugestaoCount: number = 0;
+  feedBackCount = [0, 0, 0];
+  tiposFeedbacks = ['ELOGIO', 'CRITICA', 'SUGESTAO'];
 
   constructor(
     private feedbackService: FeedBackService,
@@ -19,11 +18,20 @@ export class DetalharFeedbackEnviadoComponent {
   ) {}
 
   ngOnInit() {
-    this.feedbackService.getFeedbackSizes().subscribe((feedbackData: any) => {
-      this.elogioCount = feedbackData.elogio;
-      this.criticaCount = feedbackData.critica;
-      this.sugestaoCount = feedbackData.sugestao;
-    });
+    this.tiposFeedbacks.forEach((tipo) =>
+      this.feedbackService.getFeedbackSizes(tipo).subscribe((count: number) => {
+        switch (tipo) {
+          case 'ELOGIO':
+            this.feedBackCount[0] = count;
+            break;
+          case 'CRITICA':
+            this.feedBackCount[1] = count;
+            break;
+          case 'SUGESTAO':
+            this.feedBackCount[2] = count;
+        }
+      })
+    );
   }
 
   openModal(tipoFeedBack: string) {

@@ -27,7 +27,6 @@ export class ListarFeedbackComponent {
       this.feedBackService
         .getFeedbacks(tipo)
         .subscribe((data: IFeedBackResponse[]) => {
-          console.log(data);
           this.dataTable.concat(data);
           this.feedbacks = new MatTableDataSource(this.dataTable);
         })
