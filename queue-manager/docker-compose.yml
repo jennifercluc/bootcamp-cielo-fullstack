@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  localstack:
+    container_name: "app-java"
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+    environment:
+      - EDGE_PORT=4566
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=XXXXXXXXXXX1
+      - AWS_SECRET_ACCESS_KEY=XXXXXXXXXXX2
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - SERVICES=s3,secretsmanager,lambda,sqs,cloudwatch,sns
+      - HOST_TMP_FOLDER=${TMPDIR}
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./docker/localstack/:/docker-entrypoint-initaws.d"

@@ -6,21 +6,21 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import java.util.UUID;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerFeedbackDTO {
     private String id;
     private Status status;
     private Type type;
     private String message;
-    private String topicArn;
 
     public CustomerFeedbackDTO(){};
-    public CustomerFeedbackDTO(String id, Status status, Type type, String message, String topicArn) {
-        this.id = id;
+    public CustomerFeedbackDTO(Status status, Type type, String message) {
+        this.id = UUID.randomUUID().toString();
         this.status = status;
         this.type = type;
         this.message = message;
-        this.topicArn = topicArn;
     }
 
     @JsonGetter("MessageId")
@@ -57,15 +57,5 @@ public class CustomerFeedbackDTO {
     @JsonSetter("Message")
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    @JsonGetter("TopicArn")
-    public String getTopicArn() {
-        return topicArn;
-    }
-
-    @JsonSetter("TopicArn")
-    public void setTopicArn(String topicArn) {
-        this.topicArn = topicArn;
     }
 }

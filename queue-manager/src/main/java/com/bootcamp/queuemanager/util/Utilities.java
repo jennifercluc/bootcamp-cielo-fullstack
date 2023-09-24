@@ -13,7 +13,7 @@ public class Utilities {
         String messageBody = message.body();
 
         CustomerFeedbackDTO customerFeedbackDTO = objectMapper.readValue(messageBody, CustomerFeedbackDTO.class);
-        String topicArn = customerFeedbackDTO.getTopicArn();
+        String topicArn = "customerFeedbackDTO.getTopicArn()";
         customerFeedbackDTO.setType(getTypeFromArn(topicArn));
         return customerFeedbackDTO;
     }

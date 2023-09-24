@@ -1,11 +1,14 @@
 package com.bootcamp.queuemanager.publisher;
 
+import com.bootcamp.queuemanager.dto.CustomerFeedbackDTO;
 import com.bootcamp.queuemanager.dto.CustomerFeedbackRequestDTO;
-import com.bootcamp.queuemanager.exception.BadRequestException;
 import com.bootcamp.queuemanager.service.FeedbackService;
+import com.bootcamp.queuemanager.util.Status;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.sns.SnsClient;
@@ -13,9 +16,11 @@ import software.amazon.awssdk.services.sns.model.PublishRequest;
 import software.amazon.awssdk.services.sns.model.PublishResponse;
 
 @Component
+@RequiredArgsConstructor
 public class SNSPublisher {
-    @Autowired
-    private SnsClient snsClient;
+
+    private final SnsClient snsClient;
+    private final ObjectMapper objectMapper;
 
     @Value("${aws.sns.sugestoes-arn}")
     private String snsTopicSugestoes;
@@ -26,13 +31,10 @@ public class SNSPublisher {
 
     private static final Logger LOG = LoggerFactory.getLogger(FeedbackService.class);
 
-    public SNSPublisher(SnsClient snsClient) {
-        this.snsClient = snsClient;
-    }
-
-    public void sendNotification(CustomerFeedbackRequestDTO feedback) {
+    @SneakyThrows
+    public void sendNotification(CustomerFeedbackRequestDTO requestDTO) {
         String snsArn;
-        switch (feedback.getType()){
+        switch (requestDTO.getType()){
             case SUGESTAO -> snsArn = snsTopicSugestoes;
             case ELOGIO -> snsArn = snsTopicElogios;
             case CRITICA -> snsArn = snsTopicCriticas;
@@ -40,15 +42,30 @@ public class SNSPublisher {
                     "Consider SUGESTAO, ELOGIO or CRITICA.");
         }
 
+        CustomerFeedbackDTO feedback = buildCustomerFeedbackDTO(requestDTO);
+        String message = objectMapper.writeValueAsString(feedback);
+
         PublishRequest publishRequest = PublishRequest.builder()
                 .topicArn(snsArn)
                 .messageGroupId("DEFAULT-GROUP-ID")
-                .message(feedback.getMessage())
+                .message(message)
                 .build();
 
         LOG.info("[PUBLISHER] Sending Message to {} SNS. Message: {}",
-                feedback.getType(), feedback.getMessage());
+                requestDTO.getType(), requestDTO.getMessage());
 
-        PublishResponse response = snsClient.publish(publishRequest);
+        snsClient.publish(publishRequest);
+    }
+
+    @SneakyThrows
+    public CustomerFeedbackDTO buildCustomerFeedbackDTO(CustomerFeedbackRequestDTO customerFeedbackRequestDTO) {
+        CustomerFeedbackDTO feedback = new CustomerFeedbackDTO();
+
+        feedback.setType(customerFeedbackRequestDTO.getType());
+        feedback.setMessage(customerFeedbackRequestDTO.getMessage());
+        feedback.setStatus(Status.RECEBIDO);
+
+        return feedback;
+
     }
 }

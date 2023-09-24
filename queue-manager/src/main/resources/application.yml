@@ -1,0 +1,33 @@
+aws:
+    accessKeyId: AKIARSFY3JGO7DJC3O6I
+    secretKey: 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
+    sns:
+        criticas-arn: arn:aws:sns:us-east-1:107761846685:ada_cielo_critica.fifo
+        elogios-arn: arn:aws:sns:us-east-1:107761846685:ada_cielo_elogio.fifo
+        sugestoes-arn: arn:aws:sns:us-east-1:107761846685:ada_cielo_sugestao.fifo
+    sqs:
+        criticas-arn: arn:aws:sqs:us-east-1:107761846685:ada_cielo_critica
+        criticas-name: ada_cielo_critica
+        criticas-url: https://sqs.us-east-1.amazonaws.com/107761846685/ada_cielo_critica
+        elogios-arn: arn:aws:sqs:us-east-1:107761846685:ada_cielo_elogio
+        elogios-name: ada_cielo_elogio
+        elogios-url: https://sqs.us-east-1.amazonaws.com/107761846685/ada_cielo_elogio
+        sugestoes-arn: arn:aws:sqs:us-east-1:107761846685:ada_cielo_sugestao
+        sugestoes-name: ada_cielo_sugestao
+        sugestoes-url: https://sqs.us-east-1.amazonaws.com/107761846685/ada_cielo_sugestao
+
+cloud:
+    aws:
+        credentials:
+            access-key: AKIARSFY3JGO7DJC3O6I
+            secret-key: 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
+        endpoint: https://sqs.us-east-1.amazonaws.com/107761846685
+        region:
+            auto: false
+            static: us-east-1
+        stack:
+            auto: false
+
+g6:
+    openapi:
+        dev-url: http://localhost:8080
