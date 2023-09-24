@@ -30,8 +30,8 @@ public class SQSConsumer {
     private String queueCriticasUrl;
 
     private final SqsClient sqsClient;
-    private final ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap;
     private static final Logger LOG = LoggerFactory.getLogger(SQSConsumer.class);
+    private final ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap;
 
     @Autowired
     public SQSConsumer(SqsClient sqsClient, ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap) {
@@ -41,10 +41,10 @@ public class SQSConsumer {
 
     /* Consome, processa e remove a mensagem "da vez" na fila SQS. */
     public void execute(Type type) {
-        String queueUrl = getUrlFromType(type);
-
+        String url = getUrlFromType(type);
+        LOG.info("[CONSUMER] EXECUTE: {}",  url);
         ReceiveMessageRequest receiveMessageRequest = ReceiveMessageRequest.builder()
-                .queueUrl(queueUrl)
+                .queueUrl(url)
                 .maxNumberOfMessages(1)
                 .build();
 
@@ -55,11 +55,31 @@ public class SQSConsumer {
 
             CustomerFeedbackDTO feedbackDTO = Utilities.messageToDTO(message);
             addFeedbackToLocalStorage(feedbackDTO);
-            process(queueUrl, message, feedbackDTO);
+            process(url, message, feedbackDTO);
         } catch (Exception e){
             System.err.println(e.getMessage());
         }
     }
+
+    /*public void execute(Type type, String url) {
+        LOG.info("[CONSUMER] EXECUTE: {}",  url);
+        ReceiveMessageRequest receiveMessageRequest = ReceiveMessageRequest.builder()
+                .queueUrl(url)
+                .maxNumberOfMessages(1)
+                .build();
+
+        try{
+            ReceiveMessageResponse receiveMessageResponse = sqsClient.receiveMessage(receiveMessageRequest);
+            Message message = receiveMessageResponse.messages().stream().findFirst().orElseThrow();
+            LOG.info("[CONSUMER] Message from Queue. Message: {}",  message);
+
+            CustomerFeedbackDTO feedbackDTO = Utilities.messageToDTO(message);
+            addFeedbackToLocalStorage(feedbackDTO);
+            process(url, message, feedbackDTO);
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    */
 
     /* Processa o feedback e altera seu status para FINALIZADO. */
     private void process(String queueUrl, Message message, CustomerFeedbackDTO feedbackDTO) {

@@ -50,7 +50,5 @@ public class SNSPublisher {
                 feedback.getType(), feedback.getMessage());
 
         PublishResponse response = snsClient.publish(publishRequest);
-
-        LOG.info("[PUBLISHER] SNS Response: {}", response.toString());
     }
 }
