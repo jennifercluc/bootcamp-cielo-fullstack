@@ -19,7 +19,6 @@ public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
 
-    /** Enviar Feedback **/
     @Operation(
             summary = "Envia um Feedback",
             description = "Envia um Feedback, que é uma mensagem de texto de 1 dos 3 tipos [SUGESTAO, ELOGIO, CRITICA].")
@@ -29,21 +28,33 @@ public class FeedbackController {
         return ResponseEntity.ok("Feedback enviado!");
     }
 
-    /** Obter tamanho atual da fila de feedbacks para cada tipo **/
     @Operation(
             summary = "Obtem o tamanho da fila")
     @GetMapping("/tamanho")
-    public ResponseEntity<String> obterTamanhoDaFila(@RequestParam String tipo) {
-        int tamanho = feedbackService.getQueueSize(tipo);
-        return ResponseEntity.ok("A fila do tipo " + tipo + " possui tamanho " + tamanho);
+    public ResponseEntity<Integer> obterTamanhoDaFila(@RequestParam String type) {
+        Integer size = feedbackService.getQueueSize(type);
+        return ResponseEntity.ok(size);
+    }
+
+    /** Obter informações sobre todos os feedbacks de uma fila SQS **/
+    @GetMapping("/info")
+    public ResponseEntity<LinkedList<CustomerFeedbackDTO>> obterInformacoesFila (@RequestParam String type) {
+        LinkedList<CustomerFeedbackDTO> feedbacks = feedbackService.getQueueInformation(type);
+        return ResponseEntity.ok(feedbacks);
+    }
+
+    @Operation(
+            summary = "Obtem informaçes sobre Feedbacks")
+    @GetMapping("/info/all")
+    public ResponseEntity<LinkedList<CustomerFeedbackDTO>> obterInformacoesFeedbacks (@RequestParam String type) {
+        LinkedList<CustomerFeedbackDTO> feedbacks = feedbackService.getQueueInformation(type);
+        return ResponseEntity.ok(feedbacks);
     }
 
     /** Obter informações sobre todos os feedbacks na fila de cada tipo **/
-    @Operation(
-            summary = "Obtem informaçes sobre Feedbacks")
-    @GetMapping("/info")
-    public ResponseEntity<LinkedList<CustomerFeedbackDTO>> obterInformacoesFeedbacks (@RequestParam String tipo) {
-        LinkedList<CustomerFeedbackDTO> feedbacks = feedbackService.getQueueInformation(tipo);
-        return ResponseEntity.ok(feedbacks);
+    @GetMapping("/job")
+    public ResponseEntity<String> dispararArmazenamento (@RequestParam String type) {
+        feedbackService.armazenar(type);
+        return ResponseEntity.ok("Armazenamento em memória da fila "+ type +" concluído!");
     }
 }

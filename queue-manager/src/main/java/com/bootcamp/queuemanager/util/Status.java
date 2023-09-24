@@ -2,7 +2,7 @@ package com.bootcamp.queuemanager.util;
 
 public enum Status {
     RECEBIDO(1),
-    PROCESSADO(2),
+    EM_PROCESSAMENTO(2),
     FINALIZADO(3);
 
     private final int valor;
