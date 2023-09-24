@@ -10,11 +10,8 @@ import { FeedBackService } from 'src/app/shared/services/feedback.service';
 })
 export class ListarFeedbackComponent {
   displayedColumns: string[] = ['id', 'tipo', 'status', 'mensagem'];
-  dataTable: any[] = [];
   feedbacks: MatTableDataSource<IFeedBackResponse> =
     new MatTableDataSource<IFeedBackResponse>();
-
-  tiposFeedbacks = ['ELOGIO', 'CRITICA', 'SUGESTAO'];
 
   constructor(private feedBackService: FeedBackService) {}
 
@@ -23,13 +20,10 @@ export class ListarFeedbackComponent {
   }
 
   loadFeedbacks() {
-    this.tiposFeedbacks.forEach((tipo) =>
-      this.feedBackService
-        .getFeedbacks(tipo)
-        .subscribe((data: IFeedBackResponse[]) => {
-          this.dataTable.concat(data);
-          this.feedbacks = new MatTableDataSource(this.dataTable);
-        })
-    );
+    this.feedBackService
+      .getTodosFeedbacks()
+      .subscribe((data: IFeedBackResponse[]) => {
+        this.feedbacks = new MatTableDataSource(data);
+      });
   }
 }

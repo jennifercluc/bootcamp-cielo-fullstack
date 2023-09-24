@@ -16,6 +16,10 @@ export class FeedBackService {
     });
   }
 
+  getTodosFeedbacks(): Observable<IFeedBackResponse[]> {
+    return this.httpClient.get<IFeedBackResponse[]>(`${this.apiUrl}/info/all`);
+  }
+
   getFeedbacks(tipo: string): Observable<IFeedBackResponse[]> {
     const params = new HttpParams().set('tipo', tipo);
     return this.httpClient.get<IFeedBackResponse[]>(`${this.apiUrl}/info`, {
