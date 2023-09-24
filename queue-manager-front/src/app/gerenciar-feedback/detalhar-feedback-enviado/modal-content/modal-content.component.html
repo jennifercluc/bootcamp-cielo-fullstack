@@ -1,12 +1,11 @@
 <div class="modal-content">
   <div class="modal-header">
-    <h2>Detalhes do {{ data.tipoFeedBack }}</h2>
+    <h2>Listagem por Tipo {{ data.tipoFeedBack }}</h2>
   </div>
-  <div class="modal-body">Teste123</div>
+  <div class="modal-body">
+    <app-listar-feedback [tipoBusca]="data.tipoFeedBack"></app-listar-feedback>
+  </div>
   <div class="modal-footer">
-    <p class="footer-text">
-      *As informações apresentadas representam apenas dados de feedbacks que
-      estão na fila, que serão posteriormente processadas.
-    </p>
+    <p class="footer-text">*Apenas os feedbacks que não estão finalizados.</p>
   </div>
 </div>

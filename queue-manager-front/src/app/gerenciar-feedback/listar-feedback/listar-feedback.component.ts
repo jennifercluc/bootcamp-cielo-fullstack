@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { IFeedBackResponse } from 'src/app/shared/models/tipo-feedback.model';
+import {
+  EnumTipoFeedback,
+  IFeedBackResponse,
+} from 'src/app/shared/models/tipo-feedback.model';
 import { FeedBackService } from 'src/app/shared/services/feedback.service';
 
 @Component({
@@ -9,7 +12,10 @@ import { FeedBackService } from 'src/app/shared/services/feedback.service';
   styleUrls: ['./listar-feedback.component.scss'],
 })
 export class ListarFeedbackComponent {
-  displayedColumns: string[] = ['id', 'tipo', 'status', 'mensagem'];
+  @Input()
+  tipoBusca: string = '';
+
+  displayedColumns: string[] = ['MessageId', 'type', 'status', 'Message'];
   feedbacks: MatTableDataSource<IFeedBackResponse> =
     new MatTableDataSource<IFeedBackResponse>();
 
@@ -20,10 +26,17 @@ export class ListarFeedbackComponent {
   }
 
   loadFeedbacks() {
-    this.feedBackService
-      .getTodosFeedbacks()
-      .subscribe((data: IFeedBackResponse[]) => {
-        this.feedbacks = new MatTableDataSource(data);
-      });
+    if (!this.tipoBusca)
+      this.feedBackService
+        .getTodosFeedbacks()
+        .subscribe((data: IFeedBackResponse[]) => {
+          this.feedbacks = new MatTableDataSource(data);
+        });
+    else
+      this.feedBackService
+        .getFeedbacks(this.tipoBusca)
+        .subscribe((data: IFeedBackResponse[]) => {
+          this.feedbacks = new MatTableDataSource(data);
+        });
   }
 }

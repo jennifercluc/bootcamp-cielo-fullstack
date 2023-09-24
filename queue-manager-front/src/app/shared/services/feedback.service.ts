@@ -21,7 +21,7 @@ export class FeedBackService {
   }
 
   getFeedbacks(tipo: string): Observable<IFeedBackResponse[]> {
-    const params = new HttpParams().set('tipo', tipo);
+    const params = new HttpParams().set('type', tipo);
     return this.httpClient.get<IFeedBackResponse[]>(`${this.apiUrl}/info`, {
       params,
     });
