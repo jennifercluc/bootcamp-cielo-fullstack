@@ -19,18 +19,21 @@ export class DetalharFeedbackEnviadoComponent {
 
   ngOnInit() {
     this.tiposFeedbacks.forEach((tipo) =>
-      this.feedbackService.getFeedbackSizes(tipo).subscribe((count: number) => {
-        switch (tipo) {
-          case 'ELOGIO':
-            this.feedBackCount[0] = count;
-            break;
-          case 'CRITICA':
-            this.feedBackCount[1] = count;
-            break;
-          case 'SUGESTAO':
-            this.feedBackCount[2] = count;
-        }
-      })
+      this.feedbackService.getFeedbackSizes(tipo).subscribe(
+        (count: number) => {
+          switch (tipo) {
+            case 'ELOGIO':
+              this.feedBackCount[0] = count;
+              break;
+            case 'CRITICA':
+              this.feedBackCount[1] = count;
+              break;
+            case 'SUGESTAO':
+              this.feedBackCount[2] = count;
+          }
+        },
+        (error) => console.log(error)
+      )
     );
   }
 

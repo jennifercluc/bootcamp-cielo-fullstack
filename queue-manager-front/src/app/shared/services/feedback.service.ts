@@ -24,7 +24,7 @@ export class FeedBackService {
   }
 
   getFeedbackSizes(tipo: string): Observable<number> {
-    const params = new HttpParams().set('tipo', tipo);
+    const params = new HttpParams().set('type', tipo);
     return this.httpClient.get<number>(`${this.apiUrl}/tamanho`, {
       params,
     });
