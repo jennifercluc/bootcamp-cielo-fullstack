@@ -71,9 +71,9 @@ public class SQSConsumer {
 
         updateFeedbackStatusStored(feedbackDTO, Status.EM_PROCESSAMENTO);
         LOG.info("[CONSUMER] Feedback EM PROCESSAMENTO: {}", messageId);
-        LOG.info("[CONSUMER] Fila de ELOGIO: {}", concurrentHashMap.get(Type.ELOGIO).size());
-        LOG.info("[CONSUMER] Fila de CRITICA: {}", concurrentHashMap.get(Type.CRITICA).size());
-        LOG.info("[CONSUMER] Fila de SUGESTAO: {}", concurrentHashMap.get(Type.SUGESTAO).size());
+        LOG.info("[CONSUMER] Total de feedbacks em ELOGIO: {}", concurrentHashMap.get(Type.ELOGIO).size());
+        LOG.info("[CONSUMER] Total de feedbacks em CRITICA: {}", concurrentHashMap.get(Type.CRITICA).size());
+        LOG.info("[CONSUMER] Total de feedbacks em SUGESTAO: {}", concurrentHashMap.get(Type.SUGESTAO).size());
 
         try {
             Thread.sleep(10000); // 10 segundos
@@ -82,9 +82,9 @@ public class SQSConsumer {
         }
 
         updateFeedbackStatusStored(feedbackDTO, Status.FINALIZADO);
-        LOG.info("[CONSUMER] Fila de ELOGIO: {}", concurrentHashMap.get(Type.ELOGIO).size());
-        LOG.info("[CONSUMER] Fila de CRITICA: {}", concurrentHashMap.get(Type.CRITICA).size());
-        LOG.info("[CONSUMER] Fila de SUGESTAO: {}", concurrentHashMap.get(Type.SUGESTAO).size());
+        LOG.info("[CONSUMER] Total de feedbacks em ELOGIO: {}", concurrentHashMap.get(Type.ELOGIO).size());
+        LOG.info("[CONSUMER] Total de feedbacks em CRITICA: {}", concurrentHashMap.get(Type.CRITICA).size());
+        LOG.info("[CONSUMER] Total de feedbacks em SUGESTAO: {}", concurrentHashMap.get(Type.SUGESTAO).size());
 
         deleteProcessedMessage(queueUrl, message);
         LOG.info("[CONSUMER] Feedback FINALIZADO: {}", messageId);
@@ -97,10 +97,9 @@ public class SQSConsumer {
 
     private void updateFeedbackStatusStored(CustomerFeedbackDTO feedbackDTO, Status newStatus) {
         concurrentHashMap.get(feedbackDTO.getType()).stream()
-                .filter(feedback -> {
-                    if (feedback.getId().equals(feedbackDTO.getId())) feedback.setStatus(newStatus);
-                    return true;
-                });
+                .filter(feedback -> feedback.getId().equals(feedbackDTO.getId()))
+                .findFirst()
+                .ifPresent(feedbackFound -> feedbackFound.setStatus(newStatus));
     }
 
     private void addFeedbackToLocalStorage(CustomerFeedbackDTO feedbackDTO){
@@ -108,9 +107,9 @@ public class SQSConsumer {
         LOG.info("[CONSUMER] Feedback RECEBIDO: {}", feedbackDTO.getId());
         concurrentHashMap.get(feedbackDTO.getType()).add(feedbackDTO);
 
-        LOG.info("[CONSUMER] Fila de ELOGIO: {}", concurrentHashMap.get(Type.ELOGIO).size());
-        LOG.info("[CONSUMER] Fila de CRITICA: {}", concurrentHashMap.get(Type.CRITICA).size());
-        LOG.info("[CONSUMER] Fila de SUGESTAO: {}", concurrentHashMap.get(Type.SUGESTAO).size());
+        LOG.info("[CONSUMER] Total de feedbacks em ELOGIO: {}", concurrentHashMap.get(Type.ELOGIO).size());
+        LOG.info("[CONSUMER] Total de feedbacks em CRITICA: {}", concurrentHashMap.get(Type.CRITICA).size());
+        LOG.info("[CONSUMER] Total de feedbacks em SUGESTAO: {}", concurrentHashMap.get(Type.SUGESTAO).size());
     }
 
     private String getUrlFromType(Type type) {

@@ -17,17 +17,17 @@ public class ConsumerJob {
 
     private final SQSConsumer sqsConsumer;
 
-    //@Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 10000)
     public void consumeSugestaoSQSs() {
         sqsConsumer.execute(Type.SUGESTAO);
     }
 
-    //@Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 1000)
     public void consumeElogioSQSs() {
         sqsConsumer.execute(Type.ELOGIO);
     }
 
-    //@Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 1000)
     public void consumeCriticaSQSs() {
         sqsConsumer.execute(Type.CRITICA);
     }
