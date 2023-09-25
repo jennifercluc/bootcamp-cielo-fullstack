@@ -4,18 +4,25 @@ import com.bootcamp.queuemanager.util.Status;
 import com.bootcamp.queuemanager.util.Type;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.UUID;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerFeedbackDTO {
+    @JsonProperty("MessageId")
     private String id;
+    @JsonProperty("status")
     private Status status;
+    @JsonProperty("type")
     private Type type;
+    @JsonProperty("Message")
     private String message;
 
-    public CustomerFeedbackDTO(){};
+    public CustomerFeedbackDTO(){
+        this.id = UUID.randomUUID().toString();
+    };
     public CustomerFeedbackDTO(Status status, Type type, String message) {
         this.id = UUID.randomUUID().toString();
         this.status = status;

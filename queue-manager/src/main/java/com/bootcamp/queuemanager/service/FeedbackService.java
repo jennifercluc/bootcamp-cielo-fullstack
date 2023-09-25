@@ -45,6 +45,10 @@ public class FeedbackService {
                 .collect(Collectors.toCollection(LinkedList<CustomerFeedbackDTO>::new));
     }
 
+    public ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> getAllQueues() {
+        return concurrentHashMap;
+    }
+
     public void armazenar(String type) {
         sqsConsumer.execute(Type.valueOf(type));
     }

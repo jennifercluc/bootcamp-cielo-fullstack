@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
-public class AppConfiguration {
+public class AppConfig {
 
     @Bean
     public ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap() {

@@ -18,12 +18,20 @@ public class ConsumerJob {
         this.sqsConsumer = sqsConsumer;
     }
 
-    //@Scheduled(fixedRate = 15000)
-    public void consumirSQSs() {
+    //@Scheduled(fixedRate = 10000)
+    public void consumeSugestaoSQSs() {
         sqsConsumer.execute(Type.SUGESTAO);
-        sqsConsumer.execute(Type.ELOGIO);
-        sqsConsumer.execute(Type.CRITICA);
     }
+
+    /*@Scheduled(fixedRate = 1000)
+    public void consumeElogioSQSs() {
+        sqsConsumer.execute(Type.ELOGIO);
+    }
+
+    @Scheduled(fixedRate = 1000)
+    public void consumeCriticaSQSs() {
+        sqsConsumer.execute(Type.CRITICA);
+    }*/
 
 
 }
