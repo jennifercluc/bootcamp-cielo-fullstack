@@ -5,7 +5,7 @@ endpoits de API pedidos, para interação com serviços AWS
 SNS e SQS.
 
 Frontend desenvolvido em Angular demonstrando a utilização
-da API desenvolvida no backend. 
+da API desenvolvida no backend.
 
 Desenvolvedores (Equipe G6):
 - Jennifer Carolinne
@@ -32,7 +32,7 @@ Desenvolvedores (Equipe G6):
 ### AWS / Terraform
 
 - criação de tópicos e filas na AWS de acordo com informações
-  encontradas em infra-aws/terreform
+  encontradas em `infra-aws/terreform`
 
 - criação de access key com
   - direitos necessários
@@ -42,14 +42,23 @@ Desenvolvedores (Equipe G6):
   - sobre tópico e filas criadas acima
 
 Observação: Apenas para fins deste bootcamp, para facilitar,
-incluímos credenciais e identificadores de recursos 
+incluímos credenciais e identificadores de recursos
 diretamente neste repositório.
+
+### Carga inicial
+
+Com todo o ambiente preparado, é possível fazer uma carga
+inicial de feedback, 10 de cada tipo, executando o script de
+carga.
 
 ## Execução
 
 - Frontend
-  - A partir do diretório queue-manager-front execute
-    - `npm start`
+  - Para iniciar o aplicativo Angular, navegue até o diretório
+    `queue-manager-front`, instale as dependências com
+    - `npm install`
+  - e inicie o aplicativo com
+    - `ng serve`
 - Backend
   - A partir do diretório queue-manager execute
     - `mvnw spring-boot:start`
@@ -61,12 +70,6 @@ A alteração para os status "Em Processamento" e "Finalizado",
 simulando um processamento real da mensagem, ocorre em
 intervalos de 10 segundos.
 
-### Carga inicial
-
-Com todo o ambiente preparado, é possível fazer uma carga
-inicial de feedback, 10 de cada tipo, executando o script de
-carga. 
-
 ## URLs
 
 - Swagger da API (backend):
@@ -75,5 +78,3 @@ carga.
   - http://localhost:4200/
 - Spring Boot Actuator
   - http://localhost:8080/actuator
-
-Para iniciar o aplicativo Angular, navegue até o diretório `queue-manager-front`, instale as dependências com `npm install` e inicie o aplicativo com `ng serve`.
