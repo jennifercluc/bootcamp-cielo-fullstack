@@ -17,12 +17,12 @@ public enum Type {
         return valor;
     }
 
-    @JsonValue
+    //@JsonValue
     public String toValue(){
         return name().toUpperCase();
     }
 
-    @JsonCreator
+    //@JsonCreator
     public static Type fromValor(String valor) {
         for (Type tipo : Type.values()) {
             if (tipo.valor == valor) return tipo;
