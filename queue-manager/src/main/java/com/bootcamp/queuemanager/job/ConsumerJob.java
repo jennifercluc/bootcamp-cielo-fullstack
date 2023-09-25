@@ -2,21 +2,20 @@ package com.bootcamp.queuemanager.job;
 
 import com.bootcamp.queuemanager.consumer.SQSConsumer;
 import com.bootcamp.queuemanager.util.Type;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 @EnableScheduling
 public class ConsumerJob {
 
     private final SQSConsumer sqsConsumer;
-
-    @Autowired
-    public ConsumerJob(SQSConsumer sqsConsumer) {
-        this.sqsConsumer = sqsConsumer;
-    }
 
     //@Scheduled(fixedRate = 10000)
     public void consumeSugestaoSQSs() {
