@@ -1,15 +1,8 @@
 package com.bootcamp.queuemanager.configuration;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.client.builder.AwsClientBuilder;
-import com.amazonaws.services.sqs.AmazonSQSAsync;
-import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -18,7 +11,7 @@ import software.amazon.awssdk.services.sns.SnsClient;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
 @Configuration
-public class AWSConfiguration {
+public class AWSConfig {
 
     @Value("${aws.accessKeyId}")
     private String awsAccessKey;
@@ -53,7 +46,7 @@ public class AWSConfiguration {
                 .build();
     }
 
-    @Bean
+    /*@Bean
     @Primary
     public AmazonSQSAsync amazonSQSAsync() {
         final AwsClientBuilder.EndpointConfiguration endpointConfiguration =
@@ -75,5 +68,5 @@ public class AWSConfiguration {
                 .build();
 
         return amazonSQSAsync;
-    }
+    }*/
 }

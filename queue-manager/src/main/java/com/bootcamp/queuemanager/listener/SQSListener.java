@@ -28,8 +28,8 @@ public class SQSListener {
 
     private final SQSConsumer sqsConsumer;
 
-    @SqsListener(value="ada_cielo_sugestao.fifo", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
-    public void listenSugestaoQueue(String message, @Headers Map<String,String> headers) {
+    @SqsListener(value="feedback-sugestao.fifo", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
+    public void listenSugestaoQueue(String message, @Headers Map<String, String> headers) {
 
         System.out.println("[LISTENER]" + message);
         //sqsConsumer.execute(Type.SUGESTAO, queueSugestaoUrl, message);

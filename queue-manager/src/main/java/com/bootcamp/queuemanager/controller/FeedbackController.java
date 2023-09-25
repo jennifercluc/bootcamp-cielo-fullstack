@@ -3,6 +3,7 @@ package com.bootcamp.queuemanager.controller;
 import com.bootcamp.queuemanager.dto.CustomerFeedbackDTO;
 import com.bootcamp.queuemanager.dto.CustomerFeedbackRequestDTO;
 import com.bootcamp.queuemanager.service.FeedbackService;
+import com.bootcamp.queuemanager.util.Type;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Tag(name = "Feedback", description = "APIs de envio e verificação de Feedbacks")
 @RestController
@@ -46,8 +48,9 @@ public class FeedbackController {
     @Operation(
             summary = "Obtem informaçes sobre Feedbacks")
     @GetMapping("/info/all")
-    public ResponseEntity<LinkedList<CustomerFeedbackDTO>> obterInformacoesFeedbacks (@RequestParam String type) {
-        LinkedList<CustomerFeedbackDTO> feedbacks = feedbackService.getQueueInformation(type);
+    public ResponseEntity<ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>>> obterInformacoesFeedbacks
+            (@RequestParam String type) {
+        ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> feedbacks = feedbackService.getAllQueues();
         return ResponseEntity.ok(feedbacks);
     }
 
