@@ -65,7 +65,9 @@ carga.
 
 ## Sobre funcionamento
 
-O feedback buscado na fila SQS fica com o status "Recebido".
+Os feedbacks são buscados na fila SQS em intervalos de 1 segundo e 
+entram no sistema com com o status "Recebido".
+
 A alteração para os status "Em Processamento" e "Finalizado",
 simulando um processamento real da mensagem, ocorre em
 intervalos de 10 segundos.
