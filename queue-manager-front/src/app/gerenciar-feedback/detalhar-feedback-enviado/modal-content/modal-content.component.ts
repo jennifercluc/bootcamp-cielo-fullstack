@@ -10,7 +10,7 @@ import { FeedBackService } from 'src/app/shared/services/feedback.service';
   styleUrls: ['./modal-content.component.scss'],
 })
 export class ModalContentComponent {
-  displayedColumns: string[] = ['MessageId', 'type', 'status', 'Message'];
+  displayedColumns: string[] = ['id', 'type', 'status', 'Message'];
   feedbacks: MatTableDataSource<IFeedBackResponse> =
     new MatTableDataSource<IFeedBackResponse>();
 

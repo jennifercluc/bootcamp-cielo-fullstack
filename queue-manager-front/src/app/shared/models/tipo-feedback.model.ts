@@ -14,7 +14,7 @@ export interface IFeedBack {
 }
 
 export interface IFeedBackResponse {
-  MessageId: string;
+  id: string;
   type: string;
   message: string;
   status: string;

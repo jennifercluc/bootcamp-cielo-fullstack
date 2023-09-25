@@ -16,7 +16,7 @@ export class ListarFeedbackComponent {
   @Input()
   tipoBusca: string = '';
 
-  displayedColumns: string[] = ['MessageId', 'type', 'status', 'Message'];
+  displayedColumns: string[] = ['id', 'type', 'status', 'Message'];
   feedbacks: MatTableDataSource<IFeedBackResponse> =
     new MatTableDataSource<IFeedBackResponse>();
 
@@ -33,9 +33,12 @@ export class ListarFeedbackComponent {
       this.feedBackService
         .getTodosFeedbacks()
         .subscribe((data: IFeedbackAllResponse) => {
+          var listaFeedBack: IFeedBackResponse[] = [];
           this.listaEnumTipoFeedback.forEach((item) => {
-            this.feedbacks.data.concat(data[item]);
+            listaFeedBack = listaFeedBack.concat(data[item]);
           });
+          console.log(listaFeedBack);
+          this.feedbacks = new MatTableDataSource(listaFeedBack);
         });
     else
       this.feedBackService
