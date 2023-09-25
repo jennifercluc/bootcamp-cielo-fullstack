@@ -22,7 +22,7 @@ Desenvolvedores (Equipe G6):
 
 ## Diretórios
 
-- queuemanager: Implementação do backend
+- queue-manager: Implementação do backend
 - queue-manager-front:  Implementação do front end
 - resources/terraform: Arquivos relacionados aos recursos AWS necessários
 - resources/scripts: Scripts de carga de dados nas filas
