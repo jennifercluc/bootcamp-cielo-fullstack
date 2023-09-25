@@ -22,7 +22,7 @@ Desenvolvedores (Equipe G6):
 
 ## Diretórios
 
-- queuemanager: Implementação do backend
+- queue-manager: Implementação do backend
 - queue-manager-front:  Implementação do front end
 - infra-aws: Arquivos relacionados aos recursos AWS necessários
 
@@ -41,6 +41,22 @@ Desenvolvedores (Equipe G6):
 Observação: Apenas para fins deste bootcamp, para facilitar,
 incluímos credenciais e identificadores de recursos 
 diretamente neste repositório.
+
+## Execução
+
+- Frontend
+  - A partir do diretório queue-manager-front execute
+    - `npm start`
+- Backend
+  - A partir do diretório queue-manager execute
+    - `mvnw spring-boot:start`
+
+## Sobre funcionamento
+
+O feedback buscado na fila SQS fica com o status "Recebido".
+A alteração para os status "Em Processamento" e "Finalizado",
+simulando um processamento real da mensagem, ocorre em
+intervalos de 10 segundos.
 
 ## URLs
 
