@@ -35,11 +35,11 @@ Desenvolvedores (Equipe G6):
   encontradas em `infra-aws/terreform`
 
 - criação de access key com
-  - direitos necessários
-    - sqs:DeleteMessage"
-    - sns:Publish
-    - sqs:ReceiveMessage
-  - sobre tópico e filas criadas acima
+    - direitos necessários
+        - sqs:DeleteMessage"
+        - sns:Publish
+        - sqs:ReceiveMessage
+    - sobre tópico e filas criadas acima
 
 Observação: Apenas para fins deste bootcamp, para facilitar,
 incluímos credenciais e identificadores de recursos
@@ -54,19 +54,19 @@ carga.
 ## Execução
 
 - Frontend
-  - Para iniciar o aplicativo Angular, navegue até o diretório
-    `queue-manager-front`, instale as dependências com
-    - `npm install`
-  - e inicie o aplicativo com
-    - `ng serve`
+    - Para iniciar o aplicativo Angular, navegue até o diretório
+      `queue-manager-front`, instale as dependências com
+        - `npm install`
+    - e inicie o aplicativo com
+        - `ng serve`
 - Backend
-  - A partir do diretório queue-manager execute
-    - `mvnw spring-boot:start`
+    - A partir do diretório queue-manager execute
+        - `mvnw spring-boot:start`
 
 ## Sobre funcionamento
 
-Os feedbacks são buscados na fila SQS em intervalos de 1 segundo e 
-entram no sistema com com o status "Recebido".
+Os feedbacks das 3 fila SQS são buscados por 3 jobs em intervalos de
+1 segundo e entram no sistema com com o status "Recebido".
 
 A alteração para os status "Em Processamento" e "Finalizado",
 simulando um processamento real da mensagem, ocorre em
@@ -75,8 +75,8 @@ intervalos de 10 segundos.
 ## URLs
 
 - Swagger da API (backend):
-  - http://localhost:8080/swagger-ui/index.html
+    - http://localhost:8080/swagger-ui/index.html
 - Frontend:
-  - http://localhost:4200/
+    - http://localhost:4200/
 - Spring Boot Actuator
-  - http://localhost:8080/actuator
+    - http://localhost:8080/actuator
