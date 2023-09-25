@@ -59,3 +59,5 @@ carga.
   - http://localhost:4200/
 - Spring Boot Actuator
   - http://localhost:8080/actuator
+
+Para iniciar o aplicativo Angular, navegue até o diretório `queue-manager-front`, instale as dependências com `npm install` e inicie o aplicativo com `ng serve`.
