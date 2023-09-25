@@ -39,6 +39,8 @@ public class FeedbackController {
     }
 
     /** Obter informações sobre todos os feedbacks de uma fila SQS **/
+    @Operation(
+            summary = "Obtem informação sobre os Feedbacks recebidos e em processamento")
     @GetMapping("/info")
     public ResponseEntity<LinkedList<CustomerFeedbackDTO>> obterInformacoesFila (@RequestParam String type) {
         LinkedList<CustomerFeedbackDTO> feedbacks = feedbackService.getQueueInformation(type);
@@ -54,6 +56,8 @@ public class FeedbackController {
     }
 
     /** Obter informações sobre todos os feedbacks na fila de cada tipo **/
+    @Operation(
+            summary = "Armazena fila em memória")
     @GetMapping("/job")
     public ResponseEntity<String> dispararArmazenamento (@RequestParam String type) {
         feedbackService.armazenar(type);
