@@ -1,23 +1,32 @@
 package com.bootcamp.queuemanager.util;
 
-public enum Status {
-    RECEBIDO(1),
-    EM_PROCESSAMENTO(2),
-    FINALIZADO(3);
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-    private final int valor;
-    Status(int valor) {
+public enum Status {
+    RECEBIDO("RECEBIDO"),
+    EM_PROCESSAMENTO("EM_PROCESSAMENTO"),
+    FINALIZADO("FINALIZADO");
+
+    private final String valor;
+    Status(String valor) {
         this.valor = valor;
     }
 
-    public int getValor() {
+    public String getValor() {
         return valor;
     }
 
-    public static Status fromValor(int valor) {
+    @JsonValue
+    public String toValue(){
+        return name().toUpperCase();
+    }
+
+    @JsonCreator
+    public static Status fromValor(String valor) {
         for (Status status : Status.values()) {
             if (status.valor == valor) return status;
         }
-        throw new IllegalArgumentException("Valor numérico + " + valor + " inválido para Status.");
+        throw new IllegalArgumentException("Valor + " + valor + " inválido para Status.");
     }
 }

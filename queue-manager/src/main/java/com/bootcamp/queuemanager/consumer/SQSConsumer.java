@@ -4,9 +4,9 @@ import com.bootcamp.queuemanager.dto.CustomerFeedbackDTO;
 import com.bootcamp.queuemanager.util.Status;
 import com.bootcamp.queuemanager.util.Type;
 import com.bootcamp.queuemanager.util.Utilities;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.sqs.SqsClient;
@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
+@RequiredArgsConstructor
 public class SQSConsumer {
 
     @Value("${aws.sqs.sugestoes-url}")
@@ -33,15 +34,10 @@ public class SQSConsumer {
     private static final Logger LOG = LoggerFactory.getLogger(SQSConsumer.class);
     private final ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap;
 
-    @Autowired
-    public SQSConsumer(SqsClient sqsClient, ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap) {
-        this.sqsClient = sqsClient;
-        this.concurrentHashMap = concurrentHashMap;
-    }
-
     /* Consome, processa e remove a mensagem "da vez" na fila SQS. */
     public void execute(Type type) {
         String url = getUrlFromType(type);
+
         LOG.info("[CONSUMER] EXECUTE: {}",  url);
         ReceiveMessageRequest receiveMessageRequest = ReceiveMessageRequest.builder()
                 .queueUrl(url)
