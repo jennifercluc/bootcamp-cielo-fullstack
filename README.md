@@ -18,6 +18,7 @@ Desenvolvedores (Equipe G6):
 - Spring Boot
 - Maven
 - AWS SDK for Java 2
+- Node.js 18
 - Angular
 
 ## Diretórios
