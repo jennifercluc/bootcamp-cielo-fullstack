@@ -16,7 +16,7 @@ public class ConsumerJob {
 
     private final SQSConsumer sqsConsumer;
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 1000)
     public void consumeSugestaoSQSs() {
         sqsConsumer.execute(Type.SUGESTAO);
     }
