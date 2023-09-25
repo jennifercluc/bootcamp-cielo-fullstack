@@ -33,10 +33,11 @@ export class AdicionarFeedBackComponent {
   }
 
   private fetchEnviarFeedBack(novoFeedback: IFeedBack) {
-    this.feedBackService.enviarFeedBack(novoFeedback).subscribe(
+    this.feedBackService.enviarFeedback(novoFeedback).subscribe(
       (response) => {
         this.mensagem = '';
         this.tipo = '';
+        window.location.reload();
       },
       (error) => {
         console.error('Ocorreu um erro ao enviar o feedback:', error);

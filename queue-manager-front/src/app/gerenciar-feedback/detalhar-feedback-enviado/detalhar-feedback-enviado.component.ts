@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FeedBackService } from '../../shared/services/feedback.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalContentComponent } from './modal-content/modal-content.component';
+import { EnumTipoFeedback } from 'src/app/shared/models/tipo-feedback.model';
 
 @Component({
   selector: 'app-detalhar-feedback-enviado',
@@ -9,9 +10,9 @@ import { ModalContentComponent } from './modal-content/modal-content.component';
   styleUrls: ['./detalhar-feedback-enviado.component.scss'],
 })
 export class DetalharFeedbackEnviadoComponent {
-  elogioCount: number = 0;
-  criticaCount: number = 0;
-  sugestaoCount: number = 0;
+  enumTipoFeedback = EnumTipoFeedback;
+  feedBackCount: { [key: string]: number } = {};
+  listaEnumTipoFeedback = Object.values(EnumTipoFeedback);
 
   constructor(
     private feedbackService: FeedBackService,
@@ -19,11 +20,14 @@ export class DetalharFeedbackEnviadoComponent {
   ) {}
 
   ngOnInit() {
-    this.feedbackService.getFeedbackSizes().subscribe((feedbackData: any) => {
-      this.elogioCount = feedbackData.elogio;
-      this.criticaCount = feedbackData.critica;
-      this.sugestaoCount = feedbackData.sugestao;
-    });
+    this.listaEnumTipoFeedback.forEach((tipo) =>
+      this.feedbackService.getFeedbackSizes(tipo).subscribe(
+        (count: number) => {
+          this.feedBackCount[tipo] = count;
+        },
+        (error) => console.log(error)
+      )
+    );
   }
 
   openModal(tipoFeedBack: string) {

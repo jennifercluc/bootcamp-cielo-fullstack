@@ -1,7 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, of, throwError } from 'rxjs';
-import { IFeedBack } from '../models/tipo-feedback.model';
+import { Observable } from 'rxjs';
+import {
+  IFeedBack,
+  IFeedBackResponse,
+  IFeedbackAllResponse,
+} from '../models/tipo-feedback.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,50 +14,27 @@ export class FeedBackService {
   constructor(private httpClient: HttpClient) {}
   private apiUrl = 'http://localhost:8080/api/feedback';
 
-  enviarFeedBack(feedBack: IFeedBack): Observable<any> {
-    return this.httpClient.post<any>(this.apiUrl + '/envio', feedBack);
+  enviarFeedback(feedback: IFeedBack): Observable<string> {
+    return this.httpClient.post(this.apiUrl + '/envio', feedback, {
+      responseType: 'text',
+    });
   }
 
-  getFeedbacks(): Observable<any[]> {
-    return this.httpClient.get<any[]>(`${this.apiUrl}/feedbacks`);
+  getTodosFeedbacks(): Observable<IFeedbackAllResponse> {
+    return this.httpClient.get<IFeedbackAllResponse>(`${this.apiUrl}/info/all`);
   }
 
-  getFeedbackSizes(): Observable<any> {
-    const feedbackData = {
-      elogio: this.getRandomNumber(),
-      critica: this.getRandomNumber(),
-      sugestao: this.getRandomNumber(),
-    };
-
-    return of(feedbackData);
+  getFeedbacks(tipo: string): Observable<IFeedBackResponse[]> {
+    const params = new HttpParams().set('type', tipo);
+    return this.httpClient.get<IFeedBackResponse[]>(`${this.apiUrl}/info`, {
+      params,
+    });
   }
 
-  private getRandomNumber(): number {
-    return Math.floor(Math.random() * 20);
-  }
-
-  private feedbacks = [
-    {
-      id: 1,
-      tipo: 'Elogio',
-      status: 'Recebido',
-      mensagem: 'Ótimo trabalho! O aplicativo está incrível.',
-    },
-    {
-      id: 2,
-      tipo: 'Crítica',
-      status: 'Em Processamento',
-      mensagem: 'O design poderia ser melhorado.',
-    },
-    {
-      id: 3,
-      tipo: 'Sugestão',
-      status: 'Finalizado',
-      mensagem: 'Adicione mais recursos de pesquisa.',
-    },
-  ];
-
-  getFeedbacksMock(): Observable<any[]> {
-    return of(this.feedbacks); // Simulando uma chamada assíncrona
+  getFeedbackSizes(tipo: string): Observable<number> {
+    const params = new HttpParams().set('type', tipo);
+    return this.httpClient.get<number>(`${this.apiUrl}/tamanho`, {
+      params,
+    });
   }
 }

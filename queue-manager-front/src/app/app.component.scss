@@ -21,10 +21,6 @@ p {
   margin: 0;
 }
 
-.spacer {
-  flex: 1;
-}
-
 .toolbar {
   position: absolute;
   top: 0;
@@ -45,7 +41,7 @@ p {
 .content {
   margin: 82px;
   padding: 30px;
-  max-width: max-content;
+  max-width: 1200px;
   flex-direction: column;
 }
 
@@ -63,6 +59,7 @@ svg#clouds {
 }
 
 .form-container {
+  margin-right: 80px;
   flex: 1;
 }
 
