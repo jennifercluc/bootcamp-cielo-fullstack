@@ -33,13 +33,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Javax -->
-        <!-- <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>javax.jms-api</artifactId>
-            <version>2.0.1</version>
-        </dependency> -->
-
         <!-- Dependência do Jackson para manipulação de JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -82,17 +75,6 @@
             <version>2.2.6.RELEASE</version>
         </dependency>
 
-        <!-- AWS -->
-        <!--<dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk</artifactId>
-            <version>1.12.429</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-sqs</artifactId>
-            <version>1.12.556</version>
-        </dependency> -->
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>amazon-sqs-java-messaging-lib</artifactId>
@@ -104,10 +86,6 @@
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>iam-policy-builder</artifactId>
         </dependency>
-        <!-- <dependency>
-            <groupId>software.amazon.awssdk</groupId>
-            <artifactId>lambda</artifactId>
-        </dependency> -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>sns</artifactId>
@@ -116,10 +94,6 @@
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>sqs</artifactId>
         </dependency>
-        <!-- <dependency>
-            <groupId>software.amazon.awssdk</groupId>
-            <artifactId>sts</artifactId>
-        </dependency> -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -14,17 +14,6 @@ public class Utilities {
         JsonNode jsonNode = objectMapper.readTree(messageBody).get("Message");
         String strMessage = jsonNode.asText();
         CustomerFeedbackDTO customerFeedbackDTO = objectMapper.readValue(strMessage, CustomerFeedbackDTO.class);
-
-
-        //CustomerFeedbackDTO customerFeedbackDTO = objectMapper.readValue(messageBody, CustomerFeedbackDTO.class);
-        //String topicArn = "customerFeedbackDTO.getTopicArn()";
-        //customerFeedbackDTO.setType(getTypeFromArn(topicArn));
         return customerFeedbackDTO;
-    }
-    private static Type getTypeFromArn(String arn){
-        if (arn.contains(Type.SUGESTAO.name().toLowerCase())) return Type.SUGESTAO;
-        if (arn.contains(Type.ELOGIO.name().toLowerCase())) return Type.ELOGIO;
-        if (arn.contains(Type.CRITICA.name().toLowerCase())) return Type.CRITICA;
-        return null;
     }
 }

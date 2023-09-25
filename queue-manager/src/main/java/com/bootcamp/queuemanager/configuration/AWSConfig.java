@@ -45,28 +45,4 @@ public class AWSConfig {
                 .credentialsProvider(awsCredentialsProvider())
                 .build();
     }
-
-    /*@Bean
-    @Primary
-    public AmazonSQSAsync amazonSQSAsync() {
-        final AwsClientBuilder.EndpointConfiguration endpointConfiguration =
-                new AwsClientBuilder.EndpointConfiguration(
-                        endpoint,
-                        awsRegion);
-
-        System.out.println("ENDPOINT: " + endpoint);
-        System.out.println("AWSREGION: " + awsRegion);
-
-        final AWSCredentials credentials = new BasicAWSCredentials(
-                awsAccessKey,
-                awsSecretKey);
-
-        final AmazonSQSAsync amazonSQSAsync = AmazonSQSAsyncClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withEndpointConfiguration(endpointConfiguration)
-                .build();
-
-        return amazonSQSAsync;
-    }*/
 }

@@ -47,7 +47,7 @@ public class SQSConsumer {
         try{
             ReceiveMessageResponse receiveMessageResponse = sqsClient.receiveMessage(receiveMessageRequest);
             Message message = receiveMessageResponse.messages().stream().findFirst().orElseThrow();
-            LOG.info("[CONSUMER] Message from Queue. Message: {}",  message);
+            LOG.info("[CONSUMER] Message from Queue. Message: {}",  message.messageId());
 
             CustomerFeedbackDTO feedbackDTO = Utilities.messageToDTO(message);
             addFeedbackToLocalStorage(feedbackDTO);

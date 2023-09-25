@@ -5,7 +5,6 @@ import com.bootcamp.queuemanager.util.Type;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -31,6 +30,4 @@ public class ConsumerJob {
     public void consumeCriticaSQSs() {
         sqsConsumer.execute(Type.CRITICA);
     }
-
-
 }

@@ -1,13 +1,10 @@
 package com.bootcamp.queuemanager.service;
 
-import com.bootcamp.queuemanager.consumer.SQSConsumer;
 import com.bootcamp.queuemanager.dto.CustomerFeedbackDTO;
 import com.bootcamp.queuemanager.dto.CustomerFeedbackRequestDTO;
 import com.bootcamp.queuemanager.publisher.SNSPublisher;
 import com.bootcamp.queuemanager.util.Status;
 import com.bootcamp.queuemanager.util.Type;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -18,13 +15,10 @@ import java.util.stream.Collectors;
 public class FeedbackService {
 
     private final SNSPublisher snsPublisher;
-    private final SQSConsumer sqsConsumer;
     private final ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap;
-    private static final Logger LOG = LoggerFactory.getLogger(FeedbackService.class);
 
-    public FeedbackService(SNSPublisher snsPublisher, SQSConsumer sqsConsumer, ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap) {
+    public FeedbackService(SNSPublisher snsPublisher, ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> concurrentHashMap) {
         this.snsPublisher = snsPublisher;
-        this.sqsConsumer = sqsConsumer;
         this.concurrentHashMap = concurrentHashMap;
     }
 
@@ -47,9 +41,5 @@ public class FeedbackService {
 
     public ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> getAllQueues() {
         return concurrentHashMap;
-    }
-
-    public void armazenar(String type) {
-        sqsConsumer.execute(Type.valueOf(type));
     }
 }

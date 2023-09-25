@@ -38,7 +38,6 @@ public class FeedbackController {
         return ResponseEntity.ok(size);
     }
 
-    /** Obter informações sobre todos os feedbacks de uma fila SQS **/
     @Operation(
             summary = "Obtem informação sobre os Feedbacks recebidos e em processamento")
     @GetMapping("/info")
@@ -53,14 +52,5 @@ public class FeedbackController {
     public ResponseEntity<ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>>> obterInformacoesFeedbacks() {
         ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> feedbacks = feedbackService.getAllQueues();
         return ResponseEntity.ok(feedbacks);
-    }
-
-    /** Obter informações sobre todos os feedbacks na fila de cada tipo **/
-    @Operation(
-            summary = "Armazena fila em memória")
-    @GetMapping("/job")
-    public ResponseEntity<String> dispararArmazenamento (@RequestParam String type) {
-        feedbackService.armazenar(type);
-        return ResponseEntity.ok("Armazenamento em memória da fila "+ type +" concluído!");
     }
 }
