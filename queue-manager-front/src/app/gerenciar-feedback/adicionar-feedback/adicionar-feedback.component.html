@@ -1,0 +1,37 @@
+<h2>Adicione uma Sugestão, Crítica ou Elogio!</h2>
+
+<form (ngSubmit)="enviarNovoFeedBack()">
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Tipo de FeedBack</mat-label>
+      <select
+        matNativeControl
+        required
+        [(ngModel)]="tipo"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option
+          *ngFor="let tipoDeFeedback of tiposDeFeedback"
+          [value]="tipoDeFeedback.id"
+        >
+          {{ tipoDeFeedback.name }}
+        </option>
+      </select>
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field style="width: 400px">
+      <mat-label>Mensagem:</mat-label>
+      <textarea
+        matInput
+        rows="5"
+        id="mensagem"
+        name="mensagem"
+        [(ngModel)]="mensagem"
+        required
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button type="submit">Enviar FeedBack</button>
+</form>

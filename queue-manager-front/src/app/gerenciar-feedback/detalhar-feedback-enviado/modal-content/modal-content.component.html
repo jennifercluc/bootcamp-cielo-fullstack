@@ -1,0 +1,11 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h2>Listagem por Tipo {{ data.tipoFeedBack }}</h2>
+  </div>
+  <div class="modal-body">
+    <app-listar-feedback [tipoBusca]="data.tipoFeedBack"></app-listar-feedback>
+  </div>
+  <div class="modal-footer">
+    <p class="footer-text">*Apenas os feedbacks que não estão finalizados.</p>
+  </div>
+</div>
