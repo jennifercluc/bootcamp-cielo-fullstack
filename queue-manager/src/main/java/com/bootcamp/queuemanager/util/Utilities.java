@@ -12,7 +12,7 @@ public class Utilities {
     public static CustomerFeedbackDTO messageToDTO(Message message) throws JsonProcessingException {
         String messageBody = message.body();
         JsonNode jsonNode = objectMapper.readTree(messageBody).get("Message");
-        String strMessage = objectMapper.writeValueAsString(jsonNode);
+        String strMessage = jsonNode.asText();
         CustomerFeedbackDTO customerFeedbackDTO = objectMapper.readValue(strMessage, CustomerFeedbackDTO.class);
 
 
