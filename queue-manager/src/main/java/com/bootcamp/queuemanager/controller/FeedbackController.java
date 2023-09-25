@@ -48,8 +48,7 @@ public class FeedbackController {
     @Operation(
             summary = "Obtem informaçes sobre Feedbacks")
     @GetMapping("/info/all")
-    public ResponseEntity<ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>>> obterInformacoesFeedbacks
-            (@RequestParam String type) {
+    public ResponseEntity<ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>>> obterInformacoesFeedbacks() {
         ConcurrentHashMap<Type, LinkedList<CustomerFeedbackDTO>> feedbacks = feedbackService.getAllQueues();
         return ResponseEntity.ok(feedbacks);
     }

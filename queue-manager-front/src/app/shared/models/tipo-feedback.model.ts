@@ -19,3 +19,7 @@ export interface IFeedBackResponse {
   message: string;
   status: string;
 }
+
+export interface IFeedbackAllResponse {
+  [key: string]: IFeedBackResponse[];
+}

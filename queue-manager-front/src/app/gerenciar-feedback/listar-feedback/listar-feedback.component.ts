@@ -1,3 +1,4 @@
+import { IFeedbackAllResponse } from './../../shared/models/tipo-feedback.model';
 import { Component, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import {
@@ -19,6 +20,8 @@ export class ListarFeedbackComponent {
   feedbacks: MatTableDataSource<IFeedBackResponse> =
     new MatTableDataSource<IFeedBackResponse>();
 
+  listaEnumTipoFeedback = Object.values(EnumTipoFeedback);
+
   constructor(private feedBackService: FeedBackService) {}
 
   ngOnInit() {
@@ -29,8 +32,10 @@ export class ListarFeedbackComponent {
     if (!this.tipoBusca)
       this.feedBackService
         .getTodosFeedbacks()
-        .subscribe((data: IFeedBackResponse[]) => {
-          this.feedbacks = new MatTableDataSource(data);
+        .subscribe((data: IFeedbackAllResponse) => {
+          this.listaEnumTipoFeedback.forEach((item) => {
+            this.feedbacks.data.concat(data[item]);
+          });
         });
     else
       this.feedBackService

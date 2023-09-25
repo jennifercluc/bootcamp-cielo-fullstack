@@ -1,7 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, of, throwError } from 'rxjs';
-import { IFeedBack, IFeedBackResponse } from '../models/tipo-feedback.model';
+import { Observable } from 'rxjs';
+import {
+  IFeedBack,
+  IFeedBackResponse,
+  IFeedbackAllResponse,
+} from '../models/tipo-feedback.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +20,8 @@ export class FeedBackService {
     });
   }
 
-  getTodosFeedbacks(): Observable<IFeedBackResponse[]> {
-    return this.httpClient.get<IFeedBackResponse[]>(`${this.apiUrl}/info/all`);
+  getTodosFeedbacks(): Observable<IFeedbackAllResponse> {
+    return this.httpClient.get<IFeedbackAllResponse>(`${this.apiUrl}/info/all`);
   }
 
   getFeedbacks(tipo: string): Observable<IFeedBackResponse[]> {
